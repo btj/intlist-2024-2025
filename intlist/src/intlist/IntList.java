@@ -9,6 +9,7 @@ public class IntList {
 	
 	/**
 	 * @creates | result
+	 * @post | result != null
 	 */
 	public int[] getElements() { throw new RuntimeException("Not yet implemented"); }
 	
