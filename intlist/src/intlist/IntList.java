@@ -1,5 +1,6 @@
 package intlist;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 /**
@@ -8,26 +9,33 @@ import java.util.stream.IntStream;
 public class IntList {
 	
 	/**
+	 * @invar | elements != null
+	 * 
+	 * @representationObject
+	 */
+	private int[] elements;
+	
+	/**
 	 * @creates | result
 	 * @post | result != null
 	 */
-	public int[] getElements() { throw new RuntimeException("Not yet implemented"); }
+	public int[] getElements() { return elements.clone(); }
 	
 	/**
 	 * @post | result == getElements().length
 	 */
-	public int getLength() { throw new RuntimeException("Not yet implemented"); }
+	public int getLength() { return elements.length; }
 	
 	/**
 	 * @pre | 0 <= index && index < getLength()
 	 * @post | result == getElements()[index]
 	 */
-	public int getElementAt(int index) { throw new RuntimeException("Not yet implemented"); }
+	public int getElementAt(int index) { return elements[index]; }
 
 	/**
 	 * @post | getLength() == 0
 	 */
-	public IntList() { throw new RuntimeException("Not yet implemented"); }
+	public IntList() { elements = new int[] {}; }
 	
 	/**
 	 * @mutates | this
@@ -35,7 +43,15 @@ public class IntList {
 	 * @post | getElementAt(old(getLength())) == element
 	 * @post | IntStream.range(0, old(getLength())).allMatch(i -> getElementAt(i) == old(getElements())[i])
 	 */
-	public void add(int element) { throw new RuntimeException("Not yet implemented"); }
+	public void add(int element) {
+//		int[] newElements = new int[elements.length + 1];
+//		for (int i = 0; i < elements.length; i++)
+//			newElements[i] = elements[i];
+//		System.arraycopy(elements, 0, newElements, 0, elements.length);
+		
+		elements = Arrays.copyOf(elements, elements.length + 1);
+		elements[elements.length - 1] = element;
+	}
 	
 	/**
 	 * @throws IllegalStateException | getLength() == 0
@@ -47,6 +63,6 @@ public class IntList {
 		if (getLength() == 0)
 			throw new IllegalStateException("The IntList object is empty");
 		
-		throw new RuntimeException("Not yet implemented");
+		elements = Arrays.copyOf(elements, elements.length - 1);
 	}
 }
